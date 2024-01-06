@@ -2,14 +2,22 @@
   "name": "monorepo",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo  dev",
+    "dev": "turbo dev",
+    "start:dev": "turbo start:dev",
+    "build:dev": "pnpm -w run prisma:generate && turbo build",
+    "start:server": "pnpm --filter=server run start",
+    "start:client": "pnpm --filter=client run start",
+    "build:server": "pnpm -w run prisma:generate && pnpm --filter=server run build",
+    "build:client": "pnpm -w run prisma:generate && pnpm --filter=client run build",
+    "prisma:generate": "prisma generate",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": ">=pnpm@8.9.0",
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "turbo": "^1.11.3"
+  }
 }
